@@ -1,0 +1,80 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/anaconda
+{
+	"name": "Dev Container Python 3.12",
+	"image": "ghcr.io/devcontainers/python:3.12",
+	// "build": {
+	// 	"context": "..",
+	// 	"dockerfile": "Dockerfile",
+	// 	// Update 'VARIANT' to pick an Ubuntu version. Rebuild the container
+	// 	// if it already exists to update. Available variants: 18.04, 20.04
+	// 	// "args": {
+	// 	// 	"VARIANT": "18.04"
+	// 	// }
+	// },
+	"mounts": [
+		// Example of mounting a local directory into the container
+		// "source=${localWorkspaceFolder}/src,target=/workspace/src,type=bind",
+		// Example of mounting Docker socket for Docker-in-Docker scenarios
+		// "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
+		// Example of mounting SSH keys into the container
+		// "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind"
+	],
+	"runArgs": [
+		// Uncomment the next line to use Docker from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
+		// "--privileged",
+		// Uncomment the next line to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-cli.
+		// "--mount=type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock",
+		"--name",
+		"devcontainer-python-3.12"
+	],
+	// "remoteUser": "vscode",
+	"features": {
+		// "ghcr.io/devcontainers/features/node:1": {
+		// 	"nodeGypDependencies": true,
+		// 	"version": "lts"
+		// },
+		// "ghcr.io/devcontainers-contrib/features/npm-package:1": {
+		// 	"package": "typescript",
+		// 	"version": "latest"
+		// }
+		// "ghcr.io/devcontainers/features/docker-in-docker:2": {
+		// 	"moby": true,
+		// 	"azureDnsAutoDetection": true,
+		// 	"installDockerBuildx": true,
+		// 	"version": "latest",
+		// 	"dockerDashComposeVersion": "v2"
+		// }
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"editor.formatOnSave": true,
+				"files.insertFinalNewline": true,
+				"files.trimFinalNewlines": true,
+				"files.trimTrailingWhitespace": true
+			},
+			"extensions": [
+				"GitHub.copilot",
+				"ms-python.pylint",
+				"ms-python.vscode-pylance",
+				"ms-python.python",
+				"ms-python.black-formatter",
+				// "ms-azuretools.vscode-docker",
+			]
+		}
+	},
+	"postStartCommand": "./.devcontainer/post_start_command.sh",
+	"postCreateCommand": "./.devcontainer/post_create_command.sh"
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "python --version",
+	// Configure tool-specific properties.
+	// "customizations": {},
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}

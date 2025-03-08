@@ -1,0 +1,98 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-docker-compose
+{
+	"name": "Existing Docker Compose (Extend)",
+	// Update the 'dockerComposeFile' list if you have more compose files or use different names.
+	// The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
+	"dockerComposeFile": [
+		"../docker-compose.yml",
+		// "docker-compose.yml"
+	],
+	// The 'service' property is the name of the service for the container that VS Code should
+	// use. Update this value and .devcontainer/docker-compose.yml to the real service name.
+	"service": "api",
+	// The optional 'workspaceFolder' property is the path VS Code should open by default when
+	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
+	// "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	// "workspaceFolder": "/workspaces",
+	"workspaceFolder": "/code",
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {},
+		// "ghcr.io/devcontainers/features/apt:1": {
+		// 	"update": true,
+		// 	"sources": [
+		// 		"deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse",
+		// 		"deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse",
+		// 		"deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse"
+		// 	],
+		// 	"packages": [
+		// 		"curl",
+		// 		"git"
+		// 	]
+		// },
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+	},
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Uncomment the next line if you want start specific services in your Docker Compose config.
+	// "runServices": [],
+	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
+	// "shutdownAction": "none",
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "cat /etc/os-release",
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"editor.formatOnSave": true,
+				"files.insertFinalNewline": true,
+				"files.trimFinalNewlines": true,
+				"files.trimTrailingWhitespace": true,
+				"terminal.integrated.shell.linux": "/bin/fish",
+			},
+			"extensions": [
+				"GitHub.copilot",
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-python.pylint",
+				"ms-python.autopep8",
+				"ms-python.black-formatter",
+				"ms-azuretools.vscode-docker",
+				// "ms-azuretools.vscode-docker",
+			]
+		},
+		"build": {
+			// "privileged": false,
+			// "steps": [
+			// 	// 替换 sources.list 为清华大学TUNA源
+			// 	"RUN sed -i 's/http:\/\/archive.ubuntu.com\/ubuntu\//http:\/\/mirrors.tuna.tsinghua.edu.cn\/ubuntu\//g' /etc/apt/sources.list",
+			// 	"RUN sed -i 's/http:\/\/security.ubuntu.com\/ubuntu\//http:\/\/mirrors.tuna.tsinghua.edu.cn\/ubuntu\//g' /etc/apt/sources.list",
+			// 	"RUN apt-get update"
+			// ]
+			"dockerfileModes": {
+				"steps": [
+					// 替换 sources.list 为阿里云源
+					"RUN echo 'deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse' > /etc/apt/sources.list",
+					"RUN apt-get update"
+				]
+			},
+			// "dockerfileModes": {
+			// 	"mounts": [
+			// 		{
+			// 			"type": "bind",
+			// 			"source": ".devcontainer/sources.list",
+			// 			"target": "/etc/apt/sources.list"
+			// 		}
+			// 	]
+			// },
+			// "steps": [
+			// 	"RUN apt-get update"
+			// ]
+		}
+	},
+	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "devcontainer"
+	// "customShell": "/usr/bin/fish",
+	// "postCreateCommand": "apt-get update && apt-get install -y fish",
+}
